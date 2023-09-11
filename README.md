@@ -1,6 +1,18 @@
 # Data-Engineer-Take-Home-Assignment
 
-## Positions Database Design of Tables and Data Models
+### How to Run the Container
+1. Start up your container for the ETL process to run.
+```bash
+docker pull postgres
+docker pull dpage/pgadmin4
+docker volume create etl_job_positions
+docker network create job_positions_network 
+docker-compose up -d
+```
+2. Login to the DB Client pgadmin to query the tables
+
+
+### Positions Database Design of Tables and Data Models
 
 **Title table:** 
 This is the parent table of Location table and the Remuneration table. It the main table that holds the basic information about each job position.
@@ -36,7 +48,7 @@ The Remuneration table is also a child table of the Title table and it stores th
 | Description | string | The description of the salary range |
 
 
-## DBML for the Tables Relationships
+### DBML for the Tables Relationships
 ```sql
 Table Position {
     position_id          varchar(50)   [primary key]
@@ -67,4 +79,16 @@ Table PositionRemuneration {
     position_id          varchar(50)  [ref: > Position.position_id]
 }
 ```
-![DBML Diagram](dbml.jpg "DBML Diagram")
+![DBML Diagram](/images/dbml.jpg "DBML Diagram")
+
+
+
+### Describe which cloud services you would use to implement this in a cloud provider of your choosing. What are some pros and cons of your technology choice? 
+1. **Event-Driven Architecture With AWS Lambda**:
+Lambda builds a lean infrastructure on demand, scales continuously, and has a generous monthly free tier. Its execution time is capped at 15 minutes. If you have a task running longer than 15 minutes, you need to split it into subtasks and run them in parallel.
+![DBML Diagram](/images/lambda.jpg "DBML Diagram")
+
+2. **Event-Driven Architecture With Batch**: Batch environment and resources configuration is free-of-charge
+but you only pay for compute resources consumed during task execution. Batch relies on AWS ECS to manage 
+resources at the execution time by containerizing the solution, deploying the container and providing a predefined cluster environment to execute jobs
+![DBML Diagram](/images/ecs.jpg "DBML Diagram")
