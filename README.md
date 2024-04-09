@@ -99,7 +99,7 @@ Table PositionRemuneration {
 
 
 
-### Describe which cloud services you would use to implement this in a cloud provider of your choosing. What are some pros and cons of your technology choice? 
+### AWS Cloud Service Deployment Options (Pros and Cons of Each Deployment Choice)
 1. **Event-Driven Architecture With AWS Lambda**:
 Lambda builds a lean infrastructure on demand, scales continuously, and has a generous monthly free tier. Its execution time is capped at 15 minutes. If you have a task running longer than 15 minutes, you need to split it into subtasks and run them in parallel.
 ![DBML Diagram](/images/lambda.jpg "DBML Diagram")
