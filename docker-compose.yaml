@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+ myapp:
+    image: myapp:latest         
+    build:
+      context: .  
+      dockerfile: Dockerfile    
+    depends_on:
+      - pgdatabase  
+    networks:
+      - job_positions_network 
+
+ pgdatabase:
+  image: postgres
+  environment:
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=123456
+   - POSTGRES_DB=job_positions 
+  ports:
+   - "5432:5432"
+  volumes:
+   - etl_job_positions:/var/lib/postgresql/data 
+  networks:
+   - job_positions_network 
+
+ pgadmin:
+  image: dpage/pgadmin4
+  environment:
+   - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+   - PGADMIN_DEFAULT_PASSWORD=root
+  ports:
+   - "8080:80"
+  volumes:
+   - etl_job_positions:/var/lib/postgresql/data 
+  depends_on:
+   - pgdatabase
+  networks:
+   - job_positions_network 
+
+networks:
+ job_positions_network: 
+  external: true 
+
+volumes:
+  etl_job_positions: 
