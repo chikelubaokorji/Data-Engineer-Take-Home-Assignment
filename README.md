@@ -1,4 +1,20 @@
-# Data-Engineer-Take-Home-Assignment
+# USAJobs Data Curator - Data Engineering Jobs (Chicago)
+
+This project retrieves and stores data on data engineering jobs in Chicago from the USAJobs API.
+
+## Project Overview
+
+This project searches the USAJobs API for job postings containing "data engineering" in the keyword field. It then extracts and stores relevant information like job title, location, description, and salary in a persistent database. The script is designed to be containerized and deployed on a cloud platform for scheduled execution.
+
+## Features
+- Extracts data engineering jobs from USAJobs API.
+- Stores job data in a persistent database.
+- Designed for containerization and cloud deployment.
+
+## Usage
+### Prerequisites:
+- Python 3.x
+- Docker
 
 ### How to Run the Container
 1. Start up your container for the ETL process to run.
